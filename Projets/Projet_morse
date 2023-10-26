@@ -1,4 +1,4 @@
-code_morse=[]
+l=[]
 morse={'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 
     'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 
     'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 
@@ -8,8 +8,12 @@ morse={'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', '
 phrase=str(input("Que voulez vous traduire en morse (attention a bien écrire tout en majuscule): "))
 for i in range(len(phrase)):
     if morse.get(phrase[i])!=None:
-        code_morse.append(morse[phrase[i]]+' ')
+        l.append(morse[phrase[i]]+' ')
     elif phrase[i]==' ':
-        code_morse.append('/ ')
+        l.append('/ ')
+code_morse=''
+for j in l:
+    code_morse+=j
+
         
 print(code_morse)

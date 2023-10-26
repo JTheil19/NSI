@@ -1,6 +1,15 @@
+code_morse=[]
+morse={'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 
+    'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 
+    'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 
+    'Y': '-.--', 'Z': '--..'
+    }    
+
 phrase=str(input("Que voulez vous traduire en morse (attention a bien écrire tout en majuscule): "))
-morse={'A': '.=', 'B': '=...', 'C': '=.=.', 'D': '=..', 'E': '.', 'F': '..=.', 'G': '==.', 'H': '....', 
-    'I': '..', 'J': '.===', 'K': '=.=', 'L': '.=..', 'M': '==', 'N': '=.', 'O': '===', 'P': '.==.', 
-    'Q': '==.=', 'R': '.=.', 'S': '...', 'T': '=', 'U': '..=', 'V': '...=', 'W': '.==', 'X': '=..=', 
-    'Y': '=.==', 'Z': '==..'
-    }   
+for i in range(len(phrase)):
+    if morse.get(phrase[i])!=None:
+        code_morse.append(morse[phrase[i]]+' ')
+    elif phrase[i]==' ':
+        code_morse.append('/ ')
+        
+print(code_morse)

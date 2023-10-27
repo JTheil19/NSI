@@ -1,14 +1,28 @@
-morse={'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 
-    'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 
-    'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 
-    'Y': '-.--', 'Z': '--..'
+import winsound as bip
+morse={'A': '=.===', 'B': '===.=.=.=', 'C': '===.=.===.=', 'D': '===.=.=', 'E': '=', 'F': '=.=.===.=', 'G': '===.=', 'H': '=.=.=.=', 
+    'I': '=.=', 'J': '.===.===.===', 'K': '===.=.===', 'L': '=.===.=.=', 'M': '===.===', 'N': '===.=', 'O': '===.===.===', 'P': '=.===.===.=', 
+    'Q': '===.===.=.===', 'R': '=.===.=', 'S': '=.=.=', 'T': '===', 'U': '=.=.===', 'V': '=.=.=.===', 'W': '=.===.===', 'X': '===.=.=.===', 
+    'Y': '===.=.===.===', 'Z': '===.===.=.='
     }    
+
+son={'A': 'titaah', 'B': 'taahtititi', 'C': 'taahtitaahti', 'D': 'taahtiti', 'E': 'ti', 'F': 'tititaahti', 'G': 'taahtaahti', 'H': 'titititi', 
+    'I': 'titi', 'J': 'titaahtaahtaah', 'K': 'taahtitaah', 'L': 'titaahtiti', 'M': 'taahtaah', 'N': 'taahti', 'O': 'taahtaahtaah', 'P': 'titaahtaahti', 
+    'Q': 'taahtaahtitaah', 'R': 'titaahti', 'S': 'tititi', 'T': 'taah', 'U': 'tititaah', 'V': 'titititaah', 'W': 'titaahtaah', 'X': 'taahtititaah', 
+    'Y': 'taahtitaahtaah', 'Z': 'taahtaahtiti'
+    }
+
 code_morse=''
+syllabes=''
 phrase=str(input("Que voulez vous traduire en morse (attention a bien écrire tout en majuscule): "))
 for i in range(len(phrase)):
     if morse.get(phrase[i])!=None:
-        code_morse+=morse[phrase[i]]+' '
+        code_morse+=morse[phrase[i]]+'...'
+        syllabes+=son[phrase[i]]+'  '
     elif phrase[i]==' ':
-        code_morse+='/ '
+        code_morse+='.......'
+        syllabes+='       '
+
+
         
 print(code_morse)
+print(syllabes)

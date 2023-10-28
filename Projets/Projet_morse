@@ -1,6 +1,7 @@
 import winsound as bip
+import time as t
 morse={'A': '=.===', 'B': '===.=.=.=', 'C': '===.=.===.=', 'D': '===.=.=', 'E': '=', 'F': '=.=.===.=', 'G': '===.=', 'H': '=.=.=.=', 
-    'I': '=.=', 'J': '.===.===.===', 'K': '===.=.===', 'L': '=.===.=.=', 'M': '===.===', 'N': '===.=', 'O': '===.===.===', 'P': '=.===.===.=', 
+    'I': '=.=', 'J': '=.===.===.===', 'K': '===.=.===', 'L': '=.===.=.=', 'M': '===.===', 'N': '===.=', 'O': '===.===.===', 'P': '=.===.===.=', 
     'Q': '===.===.=.===', 'R': '=.===.=', 'S': '=.=.=', 'T': '===', 'U': '=.=.===', 'V': '=.=.=.===', 'W': '=.===.===', 'X': '===.=.=.===', 
     'Y': '===.=.===.===', 'Z': '===.===.=.='
     }    
@@ -11,6 +12,26 @@ son={'A': 'titaah', 'B': 'taahtititi', 'C': 'taahtitaahti', 'D': 'taahtiti', 'E'
     'Y': 'taahtitaahtaah', 'Z': 'taahtaahtiti'
     }
 
+encodage={'A': '01', 'B': '1000', 'C': '1010', 'D': '100', 'E': '0', 'F': '0010', 'G': '110', 'H': '0000',
+    'I': '00', 'J': '0111', 'K': '101', 'L': '0100', 'M': '11', 'N': '10', 'O': '111', 'P': '0110',
+    'Q': '1101', 'R': '010', 'S': '000', 'T': '1', 'U': '001', 'V': '0001', 'W': '011', 'X': '1001',
+    'Y': '1011', 'Z': '1100'
+    }    
+
+
+def sound(dic,txt):
+    for char in txt:
+        if char==' ':
+            t.sleep(4)
+        else:
+            for nbm in dic[char]:
+                if nbm=='0':
+                    bip.Beep(1000,400)
+                    t.sleep(0.001)
+                elif nbm=='1':
+                    bip.Beep(1000,700)
+                    t.sleep(0.001)
+                
 code_morse=''
 syllabes=''
 phrase=str(input("Que voulez vous traduire en morse (attention a bien écrire tout en majuscule): "))
@@ -21,8 +42,10 @@ for i in range(len(phrase)):
     elif phrase[i]==' ':
         code_morse+='.......'
         syllabes+='       '
-
-
+        t.sleep(1)
         
 print(code_morse)
 print(syllabes)
+sound(encodage,phrase)
+
+

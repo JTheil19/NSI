@@ -43,9 +43,17 @@ for i in range(len(phrase)):
         code_morse+='.......'
         syllabes+='       '
         t.sleep(1)
-        
+"""
+def trad_alpha(cd,dic):
+    for i in range(len(cd)):
+        for i in dic.values():
+              if 
+"""
+code=str(input("Entre le code morse que tu veux traduire: "))
+
 print(code_morse)
 print(syllabes)
 sound(encodage,phrase)
+print(trad_alpha(code,morse))
 
 

@@ -1,23 +1,50 @@
 import winsound as bip
 import time as t
-morse={'A': '=.===', 'B': '===.=.=.=', 'C': '===.=.===.=', 'D': '===.=.=', 'E': '=', 'F': '=.=.===.=', 'G': '===.=', 'H': '=.=.=.=', 
+morse={
+    'A': '=.===', 'B': '===.=.=.=', 'C': '===.=.===.=', 'D': '===.=.=', 'E': '=', 'F': '=.=.===.=', 'G': '===.=', 'H': '=.=.=.=', 
     'I': '=.=', 'J': '=.===.===.===', 'K': '===.=.===', 'L': '=.===.=.=', 'M': '===.===', 'N': '===.=', 'O': '===.===.===', 'P': '=.===.===.=', 
     'Q': '===.===.=.===', 'R': '=.===.=', 'S': '=.=.=', 'T': '===', 'U': '=.=.===', 'V': '=.=.=.===', 'W': '=.===.===', 'X': '===.=.=.===', 
     'Y': '===.=.===.===', 'Z': '===.===.=.='
-    }    
+}    
 
-son={'A': 'titaah', 'B': 'taahtititi', 'C': 'taahtitaahti', 'D': 'taahtiti', 'E': 'ti', 'F': 'tititaahti', 'G': 'taahtaahti', 'H': 'titititi', 
+son={
+    'A': 'titaah', 'B': 'taahtititi', 'C': 'taahtitaahti', 'D': 'taahtiti', 'E': 'ti', 'F': 'tititaahti', 'G': 'taahtaahti', 'H': 'titititi', 
     'I': 'titi', 'J': 'titaahtaahtaah', 'K': 'taahtitaah', 'L': 'titaahtiti', 'M': 'taahtaah', 'N': 'taahti', 'O': 'taahtaahtaah', 'P': 'titaahtaahti', 
     'Q': 'taahtaahtitaah', 'R': 'titaahti', 'S': 'tititi', 'T': 'taah', 'U': 'tititaah', 'V': 'titititaah', 'W': 'titaahtaah', 'X': 'taahtititaah', 
     'Y': 'taahtitaahtaah', 'Z': 'taahtaahtiti'
-    }
+}
 
-encodage={'A': '01', 'B': '1000', 'C': '1010', 'D': '100', 'E': '0', 'F': '0010', 'G': '110', 'H': '0000',
+encodage={
+    'A': '01', 'B': '1000', 'C': '1010', 'D': '100', 'E': '0', 'F': '0010', 'G': '110', 'H': '0000',
     'I': '00', 'J': '0111', 'K': '101', 'L': '0100', 'M': '11', 'N': '10', 'O': '111', 'P': '0110',
     'Q': '1101', 'R': '010', 'S': '000', 'T': '1', 'U': '001', 'V': '0001', 'W': '011', 'X': '1001',
     'Y': '1011', 'Z': '1100'
-    }    
+}    
 
+morse_officiel ={
+    'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 
+    'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 
+    'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 
+    'Y': '-.--', 'Z': '--..'
+}
+
+def trad_alpha(ph,dic):
+    code_morse=''
+    for i in range(len(ph)):
+        if dic.get(ph[i])!=None:
+            code_morse+=dic[ph[i]]+'...'
+        elif ph[i]==' ':
+            code_morse+='.......'
+    return code_morse
+
+def lec(s,dic,ph):
+    syllabes=''
+    for i in range(len(ph)):
+        if dic.get(ph[i])!=None:
+            syllabes+=s[ph[i]]+'  '
+        elif ph[i]==' ':
+            syllabes+='       '
+    return syllabes
 
 def sound(dic,txt):
     for char in txt:
@@ -27,33 +54,35 @@ def sound(dic,txt):
             for nbm in dic[char]:
                 if nbm=='0':
                     bip.Beep(1000,400)
-                    t.sleep(0.001)
+                    t.sleep(0.01)
                 elif nbm=='1':
                     bip.Beep(1000,700)
-                    t.sleep(0.001)
-                
-code_morse=''
-syllabes=''
-phrase=str(input("Que voulez vous traduire en morse (attention a bien écrire tout en majuscule): "))
-for i in range(len(phrase)):
-    if morse.get(phrase[i])!=None:
-        code_morse+=morse[phrase[i]]+'...'
-        syllabes+=son[phrase[i]]+'  '
-    elif phrase[i]==' ':
-        code_morse+='.......'
-        syllabes+='       '
-        t.sleep(1)
-"""
-def trad_alpha(cd,dic):
-    for i in range(len(cd)):
-        for i in dic.values():
-              if 
-"""
-code=str(input("Entre le code morse que tu veux traduire: "))
+                    t.sleep(0.01)
 
-print(code_morse)
-print(syllabes)
-sound(encodage,phrase)
-print(trad_alpha(code,morse))
+def trad_morse(dic,cd):
+    alpha=''
+    for i in cd:
+        for l,c in dic.items():
+            if i == c:
+                alpha+=l
+        if i =='':
+            alpha+=' '
+    return alpha
+                
+
+choix=int(input("Que veux tu faire:\nTraduire Français vers morse(1)\nTraduire Morse vers Français(2)\nEntre ta réponse ici: "))
+if choix==1:
+    phrase=str(input("Que veux tu traduire en morse : ")).upper()
+    print(trad_alpha(phrase,morse))
+    print(lec(son,morse,phrase))
+    sound(encodage,phrase)
+elif choix==2:
+    code=str(input("Entre le code morse que tu veux traduire (morse officiel:'.','-',un espace entre chaque lettre et deux pour un espace)\n: "))
+    code=code.split(' ')
+    print(trad_morse(morse_officiel,code))
+
+
+
+
 
 

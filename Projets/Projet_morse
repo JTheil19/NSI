@@ -34,7 +34,7 @@ def trad_alpha(ph,dic):
         if dic.get(ph[i])!=None:
             code_morse+=dic[ph[i]]+'...'
         elif ph[i]==' ':
-            code_morse+='.......'
+            code_morse+='....'
     return code_morse
 
 def lec(s,dic,ph):
@@ -49,15 +49,15 @@ def lec(s,dic,ph):
 def sound(dic,txt):
     for char in txt:
         if char==' ':
-            t.sleep(4)
+            t.sleep(1.5)
         else:
             for nbm in dic[char]:
                 if nbm=='0':
                     bip.Beep(1000,400)
-                    t.sleep(0.01)
+                    t.sleep(0.2)
                 elif nbm=='1':
                     bip.Beep(1000,700)
-                    t.sleep(0.01)
+                    t.sleep(0.2)
 
 def trad_morse(dic,cd):
     alpha=''
@@ -69,7 +69,6 @@ def trad_morse(dic,cd):
             alpha+=' '
     return alpha
                 
-
 choix=int(input("Que veux tu faire:\nTraduire Français vers morse(1)\nTraduire Morse vers Français(2)\nEntre ta réponse ici: "))
 if choix==1:
     phrase=str(input("Que veux tu traduire en morse : ")).upper()

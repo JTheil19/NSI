@@ -40,143 +40,222 @@ if u==1:
 else:
     print("Le joueur 2 commence à attaquer")
 
+def choix_card(choix_possibles,player):
+    while True:
+        print(player)
+        choix = input("Quelle carte veux-tu utiliser?: ")
+        if choix in choix_possibles:
+            return choix
+        else:
+            print("Le pokémon entré est KO ou inexistant. Veuillez choisir parmi :",choix_possibles)
 
-if u==1:
-    choix_carte1=str(input("Joueur 1:\n Quelle carte veux-tu utiliser?: "))
-    for i in range(len(player1)):
-        if choix_carte1==player1[i].get_nom():
-            c1=player1[i]
-    choix_carte2=str(input("Joueur 2:\n Quelle carte veux-tu utiliser?: "))
-    for i in range(len(player2)):
-        if choix_carte2==player2[i].get_nom():
-            c2=player2[i]
-    choix_attaque1=str(input("Joueur 1:\n Que souhaite tu faire? Lancer une attaque normale ou une attaque spéciale? (Attention tu ne peux utiliser une attaque spéciale qu'une seule fois dans toute la partie): "))
-    if choix_attaque1=='attaque normale':
-       l1=c2.attack(c1.get_attack())
-       c2.set_HP(l1)
-       c2.KO()
-       if c2.KO()==True:
-            player2.pop(c2)
-       print("################################################################################################################################\n Deck joueur 1:")
-       for i in player1:
-            print(i)
-       print("################################################################################################################################\n Deck joueur 2:")
-       for i in player2:
-            print(i)
-    elif choix_attaque1=='attaque spéciale':
-        l1=c2.special(c1.get_spe())
-        c2.set_HP(l1)
-        c2.KO()
-        if c2.KO()==True:
-            player2.pop(c2)
-        print("################################################################################################################################\n Deck joueur 1:")
-        for i in player1:
-            print(i)
-        print("################################################################################################################################\n Deck joueur 2:")
-        for i in player2:
-            print(i)
-    choix_carte1=str(input("Joueur 1:\n Quelle carte veux-tu utiliser?: "))
-    for i in range(len(player1)):
-        if choix_carte1==player1[i].get_nom():
-            c1=player1[i]
-    choix_carte2=str(input("Joueur 2:\n Quelle carte veux-tu utiliser?: "))
-    for i in range(len(player2)):
-        if choix_carte2==player2[i].get_nom():
-            c2=player2[i]
-    choix_attaque2=str(input("Joueur 2:\nQue souhaite tu faire? Lancer une attaque normale ou une attaque spéciale? (Attention tu ne peux utiliser une attaque spéciale qu'une seule fois dans toute la partie): "))
-    if choix_attaque2=='attaque normale':
-       l2=c1.attack(c2.get_attack())
-       c1.set_HP(l2)
-       c1.KO()
-       if c1.KO()==True:
-            player1.pop(c1)
-       print("################################################################################################################################\n Deck joueur 1:")
-       for i in player1:
-            print(i)
-       print("################################################################################################################################\n Deck joueur 2:")
-       for i in player2:
-            print(i)
-    elif choix_attaque2=='attaque spéciale':
-        l2=c1.special(c2.get_spe())
-        c1.set_HP(l2)
-        c1.KO()
-        if c1.KO()==True:
-            player1.pop(c1)
-        print("################################################################################################################################\n Deck joueur 1:")
-        for i in player1:
-            print(i)
-        print("################################################################################################################################\n Deck joueur 2:")
-        for i in player2:
-            print(i)
+def choix_attaque(choix_possibles,player):
+    while True:
+        print(player)
+        choix = input("Que souhaite tu faire? Lancer une <<Attaque normale>> ou une <<Attaque spéciale>>? (Attention tu ne peux utiliser une A spéciale qu'une seule fois dans toute la partie):   ")
+        if choix in choix_possibles:
+            return choix
+        else:
+            print("L'attaque selectionné n'existe pas ou a atteint son nombre d'utilisation maximun.\n Veuillez choisir parmi :",choix_possibles)
+
+
+noms_attaque1=["Attaque spéciale","Attaque normale"]
+noms_attaque2=["Attaque spéciale","Attaque normale"]
+noms_pokemon1=[]
+noms_pokemon2=[]
+
+while len(player1) > 0 and len(player2) > 0:
+    if u==1:
+        for i in range(len(player1)):
+            nom1=player1[i].get_nom()
+            noms_pokemon1.append(nom1)
+        choix_carte1=choix_card(noms_pokemon1,"Joueur 1")
+        noms_pokemon1=[]
+        for i in range(len(player1)):
+            if choix_carte1==player1[i].get_nom():
+                c1=player1[i]
+        for i in range(len(player2)):
+            nom2=player2[i].get_nom()
+            noms_pokemon2.append(nom2)
+        choix_carte2=choix_card(noms_pokemon2,"Joueur 2")
+        noms_pokemon2=[]
+        for i in range(len(player2)):
+            if choix_carte2==player2[i].get_nom():
+                c2=player2[i]
+        choix_attaque1=choix_attaque(noms_attaque1,"Joueur 1")
+        if choix_attaque1=='Attaque normale':
+            l1=c2.attack(c1.get_attack())
+            c2.set_HP(l1)
+            pok_ko=c2.KO()
+            if pok_ko is not None: 
+                print(pok_ko)
+                index_pok_ko = player2.index(c2)
+                player2.pop(index_pok_ko)
+            print("################################################################################################################################\n Deck joueur 1:")
+            for i in player1:
+                print(i)
+            print("################################################################################################################################\n Deck joueur 2:")
+            for i in player2:
+                print(i)
+        elif choix_attaque1=='Attaque spéciale':
+            noms_attaque1.remove("Attaque spéciale")
+            l1=c2.special(c1.get_spe())
+            c2.set_HP(l1)
+            pok_ko=c2.KO()
+            if pok_ko is not None: 
+                print(pok_ko)
+                index_pok_ko = player2.index(c2)
+                player2.pop(index_pok_ko)
+            print("################################################################################################################################\n Deck joueur 1:")
+            for i in player1:
+                print(i)
+            print("################################################################################################################################\n Deck joueur 2:")
+            for i in player2:
+                print(i)
+        for i in range(len(player1)):
+            nom1=player1[i].get_nom()
+            noms_pokemon1.append(nom1)
+        choix_carte1=choix_card(noms_pokemon1,"Joueur 1")
+        noms_pokemon1=[]
+        for i in range(len(player1)):
+            if choix_carte1==player1[i].get_nom():
+                c1=player1[i]
+        for i in range(len(player2)):
+            nom2=player2[i].get_nom()
+            noms_pokemon2.append(nom2)
+        choix_carte2=choix_card(noms_pokemon2,"Joueur 2")
+        noms_pokemon2=[]
+        for i in range(len(player2)):
+            if choix_carte2==player2[i].get_nom():
+                c2=player2[i]
+        choix_attaque2=choix_attaque(noms_attaque2,"Joueur 2")
+        if choix_attaque2=='Attaque normale':
+            l2=c1.attack(c2.get_attack())
+            c1.set_HP(l2)
+            pok_ko=c1.KO()
+            if pok_ko is not None: 
+                print(pok_ko)
+                index_pok_ko = player1.index(c1)
+                player1.pop(index_pok_ko)
+            print("################################################################################################################################\n Deck joueur 1:")
+            for i in player1:
+                print(i)
+            print("################################################################################################################################\n Deck joueur 2:")
+            for i in player2:
+                print(i)
+        elif choix_attaque2=='Attaque spéciale':
+            noms_attaque2.remove("Attaque spéciale")
+            l2=c1.special(c2.get_spe())
+            c1.set_HP(l2)
+            pok_ko=c1.KO()
+            if pok_ko is not None: 
+                print(pok_ko)
+                index_pok_ko = player1.index(c1)
+                player1.pop(index_pok_ko)
+            print("################################################################################################################################\n Deck joueur 1:")
+            for i in player1:
+                print(i)
+            print("################################################################################################################################\n Deck joueur 2:")
+            for i in player2:
+                print(i)
+    else:
+        for i in range(len(player1)):
+            nom1=player1[i].get_nom()
+            noms_pokemon1.append(nom1)
+        choix_carte1=choix_card(noms_pokemon1,"Joueur 1")
+        noms_pokemon1=[]
+        for i in range(len(player1)):
+            if choix_carte1==player1[i].get_nom():
+                c1=player1[i]
+        for i in range(len(player2)):
+            nom2=player2[i].get_nom()
+            noms_pokemon2.append(nom2)
+        choix_carte2=choix_card(noms_pokemon2,"Joueur 2")
+        noms_pokemon2=[]
+        for i in range(len(player2)):
+            if choix_carte2==player2[i].get_nom():
+                c2=player2[i]
+        choix_attaque2=choix_attaque(noms_attaque2,"Joueur 2")
+        if choix_attaque2=='Attaque normale':
+            l2=c1.attack(c2.get_attack())
+            c1.set_HP(l2)
+            pok_ko=c1.KO()
+            if pok_ko is not None: 
+                print(pok_ko)
+                index_pok_ko = player1.index(c1)
+                player1.pop(index_pok_ko)
+            print("################################################################################################################################\n Deck joueur 1:")
+            for i in player1:
+                print(i)
+            print("################################################################################################################################\n Deck joueur 2:")
+            for i in player2:
+                print(i)
+        elif choix_attaque2=='Attaque spéciale':
+            noms_attaque2.remove("Attaque spéciale")
+            l2=c1.special(c2.get_spe())
+            c1.set_HP(l2)
+            pok_ko=c1.KO()
+            if pok_ko is not None: 
+                print(pok_ko)
+                index_pok_ko = player1.index(c1)
+                player1.pop(index_pok_ko)
+            print("################################################################################################################################\n Deck joueur 1:")
+            for i in player1:
+                print(i)
+            print("################################################################################################################################\n Deck joueur 2:")
+            for i in player2:
+                print(i)
+        for i in range(len(player1)):
+            nom1=player1[i].get_nom()
+            noms_pokemon1.append(nom1)
+        choix_carte1=choix_card(noms_pokemon1,"Joueur 1")
+        noms_pokemon1=[]
+        for i in range(len(player1)):
+            if choix_carte1==player1[i].get_nom():
+                c1=player1[i]
+        for i in range(len(player2)):
+            nom2=player2[i].get_nom()
+            noms_pokemon2.append(nom2)
+        choix_carte2=choix_card(noms_pokemon2,"Joueur 2")
+        noms_pokemon2=[]
+        for i in range(len(player2)):
+            if choix_carte2==player2[i].get_nom():
+                c2=player2[i]
+        choix_attaque1=choix_attaque(noms_attaque1,"Joueur 1")
+        if choix_attaque1=='Attaque normale':
+            l1=c2.attack(c1.get_attack())
+            c2.set_HP(l1)
+            pok_ko=c2.KO()
+            if pok_ko is not None: 
+                print(pok_ko)
+                index_pok_ko = player2.index(c2)
+                player2.pop(index_pok_ko)
+            print("################################################################################################################################\n Deck joueur 1:")
+            for i in player1:
+                print(i)
+            print("################################################################################################################################\n Deck joueur 2:")
+            for i in player2:
+                print(i)
+        elif choix_attaque1=='Attaque spéciale':
+            noms_attaque1.remove("Attaque spéciale")
+            l1=c2.special(c1.get_spe())
+            c2.set_HP(l1)
+            pok_ko=c2.KO()
+            if pok_ko is not None: 
+                print(pok_ko)
+                index_pok_ko = player2.index(c2)
+                player2.pop(index_pok_ko)
+            print("################################################################################################################################\n Deck joueur 1:")
+            for i in player1:
+                print(i)
+            print("################################################################################################################################\n Deck joueur 2:")
+            for i in player2:
+                print(i)
+
+if len(player1)>len(player2):
+    print("Le joueur 1 a gagné!!")
 else:
-    choix_carte1=str(input("Joueur 1:\n Quelle carte veux-tu utiliser?: "))
-    for i in range(len(player1)):
-        if choix_carte1==player1[i].get_nom():
-            c1=player1[i]
-    choix_carte2=str(input("Joueur 2:\n Quelle carte veux-tu utiliser?: "))
-    for i in range(len(player2)):
-        if choix_carte2==player2[i].get_nom():
-            c2=player2[i]
-    choix_attaque2=str(input("Joueur 2:\nQue souhaite tu faire? Lancer une attaque normale ou une attaque spéciale? (Attention tu ne peux utiliser une attaque spéciale qu'une seule fois dans toute la partie): "))
-    if choix_attaque2=='attaque normale':
-       l2=c1.attack(c2.get_attack())
-       c1.set_HP(l2)
-       c1.KO()
-       if c1.KO()==True:
-            player1.pop(c1)
-       print("################################################################################################################################\n Deck joueur 1:")
-       for i in player1:
-            print(i)
-       print("################################################################################################################################\n Deck joueur 2:")
-       for i in player2:
-            print(i)
-    elif choix_attaque2=='attaque spéciale':
-        l2=c1.special(c2.get_spe())
-        c1.set_HP(l2)
-        c1.KO()
-        if c1.KO()==True:
-            player1.pop(c1)
-        print("################################################################################################################################\n Deck joueur 1:")
-        for i in player1:
-            print(i)
-        print("################################################################################################################################\n Deck joueur 2:")
-        for i in player2:
-            print(i)
-    choix_carte1=str(input("Joueur 1:\n Quelle carte veux-tu utiliser?: "))
-    for i in range(len(player1)):
-        if choix_carte1==player1[i].get_nom():
-            c1=player1[i]
-    choix_carte2=str(input("Joueur 2:\n Quelle carte veux-tu utiliser?: "))
-    for i in range(len(player2)):
-        if choix_carte2==player2[i].get_nom():
-            c2=player2[i]
-    choix_attaque1=str(input("Joueur 1:\n Que souhaite tu faire? Lancer une attaque normale ou une attaque spéciale? (Attention tu ne peux utiliser une attaque spéciale qu'une seule fois dans toute la partie): "))
-    if choix_attaque1=='attaque normale':
-       l1=c2.attack(c1.get_attack())
-       c2.set_HP(l1)
-       c2.KO()
-       if c2.KO()==True:
-            player2.pop(c2)
-       print("################################################################################################################################\n Deck joueur 1:")
-       for i in player1:
-            print(i)
-       print("################################################################################################################################\n Deck joueur 2:")
-       for i in player2:
-            print(i)
-    elif choix_attaque1=='attaque spéciale':
-        l1=c2.special(c1.get_spe())
-        c2.set_HP(l1)
-        c2.KO()
-        if c2.KO()==True:
-            player2.pop(c2)
-        print("################################################################################################################################\n Deck joueur 1:")
-        for i in player1:
-            print(i)
-        print("################################################################################################################################\n Deck joueur 2:")
-        for i in player2:
-            print(i)
-#while deck_empty()!=True:
-#    pass
+    print("Le joueur 2 a gangé!!")
 
 
        

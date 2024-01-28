@@ -1,11 +1,11 @@
 import pygame 
 from pygame.locals import *
-from Fond import *
+from Background_game import Init_fond
 
 pygame.init() #initialisation des modules
 
 fenetre=pygame.display.set_mode((1500,1000),RESIZABLE) #créer un affichage
-fond_menu=pygame.image.load("441171.jpg").convert #création du fond d'ecran
+fond_menu=pygame.image.load(Init_fond.image_menu).convert() #création du fond d'ecran
 fenetre.blit(fond_menu,(0,0))
 pygame.display.flip()
 
@@ -14,5 +14,4 @@ while infini: #la fenetre reste ouverte
     for event in pygame.event.get():
         if event.type==QUIT: #si on veut quitter
             infini=0
-            
- 
+        

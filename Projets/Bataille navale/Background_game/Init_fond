@@ -1,5 +1,0 @@
-image_menu="C:/Users/jeant/OneDrive/Documents/GitHub/NSI/Projets/Bataille navale/Background_game/44171.jpg"
-
-def br(1):
-    i="je suis"
-    return i

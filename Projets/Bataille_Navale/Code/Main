@@ -1,16 +1,16 @@
 import pygame
 from pygame.locals import *
-import os
 
 pygame.init()
 
 
-fenetre = pygame.display.set_mode((640, 480))#création d'une fenetre
+fenetre = pygame.display.set_mode((1500, 1000),RESIZABLE)#création d'une fenetre
 
-image_menu=os.path.join('C:/Users/jeant/OneDrive/Documents/GitHub/NSI/Projets/Bataille_Navale/Backgrounds_game/boat-6986230_1280.png')
+image_menu="Projets/Bataille_Navale/Backgrounds_game/boat-6986230_1280.png"
+fond_menu = pygame.image.load(image_menu).convert_alpha() #affichage menu
 
-fond_menu = pygame.image.load(image_menu).convert()
 fenetre.blit(fond_menu, (0,0))
+
 
 pygame.display.flip()
 

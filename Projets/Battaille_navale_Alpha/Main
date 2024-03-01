@@ -1,3 +1,5 @@
+import Bib_main as d
+
 jeu=[[0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0],
@@ -9,45 +11,9 @@ jeu=[[0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0]]
 
-def affichage(jeu):
-     print("  ", end="")
-     for i in range(10):
-          print(f" {chr(65+i)}", end="")#affichage des lettres
-     print("\n" + "   " + "_ " * 10)  # Ligne de séparation
-     for i, ligne in enumerate(jeu):#compte le nbm d'element
-          print(f"{i+1}|", end=" ")  # Afficher l'indice de ligne
-          for case in ligne:
-               if case == 0:
-                    print("~", end=" ")
-               elif case == 1:
-                    print("B", end=" ")
-               elif case == 2:
-                    print("X", end=" ")
-               elif case == 3:
-                    print("O", end=" ")
-          print()  # Nouvelle ligne après chaque ligne du plateau
-
-def bateau(jeu,ligne,colonne,taille):
-     for i in range(taille):
-          jeu[ligne][colonne+i]=1
-     
-
-def jeu_stop(jeu):
-     for ligne in jeu:
-          for case in ligne:
-               if case==1:
-                    return True
-     return False
-               
-def get_char(mot):
-     i=[]
-     for lettre in mot:
-          i.append(lettre)
-     return i
-
 
 bateau(jeu,2,4,3)
-affichage(jeu)
+d.affichage(jeu)
 
 
 attack=input("Attaque?: ").upper()

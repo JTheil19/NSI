@@ -1,2 +1,0 @@
-lettre=ord("A")
-print(lettre)

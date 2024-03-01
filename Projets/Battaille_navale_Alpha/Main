@@ -1,0 +1,35 @@
+jeu=[[0,0,0,0,0,0,0,0,0,0],
+     [0,0,0,0,0,0,0,0,0,0],
+     [0,0,0,0,0,0,0,0,0,0],
+     [0,0,0,0,0,0,0,0,0,0],
+     [0,0,0,0,0,0,0,0,0,0],
+     [0,0,0,0,0,0,0,0,0,0],
+     [0,0,0,0,0,0,0,0,0,0],
+     [0,0,0,0,0,0,0,0,0,0],
+     [0,0,0,0,0,0,0,0,0,0],
+     [0,0,0,0,0,0,0,0,0,0]]
+
+def affichage(jeu):
+     print("  ", end="")
+     for i in range(10):
+          print(f" {chr(65+i)}", end="")#affichage des lettres
+     print("\n" + "   " + "_ " * 10)  # Ligne de séparation
+    
+    # Afficher le plateau de jeu avec des lignes de bordure
+     for i, ligne in enumerate(jeu):
+          print(f"{i+1}|", end=" ")  # Afficher l'indice de ligne
+          for case in ligne:
+               if case == 0:
+                    print("~", end=" ")
+               elif case == 1:
+                    print("B", end=" ")
+               elif case == 2:
+                    print("X", end=" ")
+               elif case == 3:
+                    print("O", end=" ")
+          print()  # Nouvelle ligne après chaque ligne du plateau
+     print("\n" + "-" * 21)  # Ligne de séparation
+
+
+affichage(jeu)
+

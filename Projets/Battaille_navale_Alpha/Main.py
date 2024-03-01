@@ -1,4 +1,4 @@
-import Bib_main as d
+from Bib_main import *
 
 jeu=[[0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0],
@@ -13,8 +13,8 @@ jeu=[[0,0,0,0,0,0,0,0,0,0],
 
 
 bateau(jeu,2,4,3)
-d.affichage(jeu)
+affichage(jeu)
 
 
 attack=input("Attaque?: ").upper()
-print(get_char(attack))
+get_char(attack)

@@ -18,5 +18,3 @@ d.affichage(jeu)
 
 attack=input("Attaque?: ").upper()
 print(get_char(attack))
-
-

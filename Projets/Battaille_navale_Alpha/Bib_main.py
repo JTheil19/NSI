@@ -16,10 +16,19 @@ def affichage(jeu):
                     print("O", end=" ")
           print()  # Nouvelle ligne après chaque ligne du plateau
 
-def bateau(jeu,ligne,colonne,taille):
-     for i in range(taille):
-          jeu[ligne][colonne+i]=1
-     
+def placement_bateau(jeu):
+     case=input("Ou voulez vous placer le bateau?(case):").upper()
+     placement=get_char(case)
+     position_x=attack_x(placement)
+     position_y=attack_y(placement) 
+     sens=input("Souhaites-tu placer ton navire verticalement ou horizontalement?(V ou H): ").upper()
+     taille=int(input("Quelle taille est ton navire?(max:5): "))
+     if sens=="H":
+          for i in range(taille):
+               jeu[position_x][position_y+i]=1
+     elif sens=="V":
+          for i in range(taille):
+               jeu[position_x+i][position_y]=1
 
 def jeu_stop(jeu):
      for ligne in jeu:
@@ -34,7 +43,7 @@ def get_char(mot):
           i.append(lettre)
      return i
 
-def attack(jeu,pos)
+def attack_y(pos):
      if pos[0]=='A':
           index_y=0
      elif pos[0]=='B':
@@ -55,6 +64,9 @@ def attack(jeu,pos)
           index_y=8
      elif pos[0]=='J':
           index_y=9
+     return index_y
+
+def attack_x(pos):
      if pos[1]=='1':
           index_x=0
      elif pos[1]=='2':
@@ -75,5 +87,13 @@ def attack(jeu,pos)
           index_x=8
      elif pos[1]=='10':
           index_x=9
+     return index_x
 
-          
+
+def jeu_fonctionnement(index_y,index_x,jeu):
+     if jeu[index_x][index_y]==0:
+          jeu[index_x][index_y]=3
+     elif jeu[index_x][index_y]==1:
+          jeu[index_x][index_y]=2
+     
+     

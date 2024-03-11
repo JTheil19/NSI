@@ -11,8 +11,9 @@ jeu=[[0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0]]
 
- 
-placement_bateau(jeu)
+affichage(jeu)
+for i in range(2):
+    placement_bateau(jeu)
 affichage(jeu)
 
 """while jeu_stop(jeu)!=False:

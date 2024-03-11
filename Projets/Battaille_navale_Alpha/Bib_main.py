@@ -23,6 +23,19 @@ def placement_bateau(jeu):
      position_y=attack_y(placement) 
      sens=input("Souhaites-tu placer ton navire verticalement ou horizontalement?(V ou H): ").upper()
      taille=int(input("Quelle taille est ton navire?(max:5): "))
+#Si le bateau depasse du plateau
+     if (sens == "H" and position_y + taille > len(jeu[0])) or \
+       (sens == "V" and position_x + taille > len(jeu)):
+        print("Erreur: Le bateau dépasse la zone de jeu. Veuillez réessayer.")
+        return
+
+#Si la place est deja rpsie
+     for i in range(taille):
+          if sens == "H" and jeu[position_x][position_y + i] == 1 or \
+               sens == "V" and jeu[position_x + i][position_y] == 1:
+               print("Erreur: La case est déjà occupée. Veuillez réessayer.")
+               return
+        
      if sens=="H":
           for i in range(taille):
                jeu[position_x][position_y+i]=1

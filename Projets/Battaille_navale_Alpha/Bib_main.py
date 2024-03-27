@@ -1,23 +1,31 @@
 from random import randint
 
 
-def affichage(jeu):
+def affichage(jeu, mode):
      print("  ", end="")
      for i in range(10):
-          print(f" {chr(65+i)}", end="")#affichage des lettres
+          print(f" {chr(65+i)}", end="")  # Affichage des lettres
      print("\n" + "   " + "_ " * 10)  # Ligne de séparation
-     for i, ligne in enumerate(jeu): #compte le nbm d'element
+     for i, ligne in enumerate(jeu):  # Compte le nombre d'éléments
           print(f"{i+1}|", end=" ")  # Afficher l'indice de ligne
-          for case in ligne:
-               if case == 0:
-                    print("~", end=" ")
-               elif case == 1:
-                    print("B", end=" ")
-               elif case == 2:
-                    print("X", end=" ")
-               elif case == 3:
-                    print("O", end=" ")
-          print()  # Nouvelle ligne après chaque ligne du plateau
+          for j, case in enumerate(ligne):
+               if mode == "normal":
+                    if case == 0:
+                         print("~", end=" ")
+                    elif case == 1:
+                         print("B", end=" ")
+                    elif case == 2:
+                         print("X", end=" ")
+                    elif case == 3:
+                         print("O", end=" ")
+               elif mode == "attaque":
+                    if case == 3:
+                         print("O", end=" ")
+                    elif case ==  2:
+                         print("X",end=" ")
+                    else:
+                         print("~", end=" ")
+          print()  # Nouvelle ligne après chaque ligne du plateau  # Nouvelle ligne après chaque ligne du plateau
 
 def placement_bateau(jeu):
      case=input("Ou voulez vous placer le bateau?(case):").upper()
@@ -30,14 +38,14 @@ def placement_bateau(jeu):
      if (sens == "H" and position_y + taille > len(jeu[0])) or \
        (sens == "V" and position_x + taille > len(jeu)):
         print("Erreur: Le bateau dépasse la zone de jeu. Veuillez réessayer.")
-        return
+        return False
 
 #Si la place est deja rpsie
      for i in range(taille):
           if sens == "H" and jeu[position_x][position_y + i] == 1 or \
                sens == "V" and jeu[position_x + i][position_y] == 1:
                print("Erreur: La case est déjà occupée. Veuillez réessayer.")
-               return
+               return False
         
      if sens=="H":
           for i in range(taille):
@@ -55,9 +63,16 @@ def jeu_stop(jeu):
                
 def get_char(mot):
      i=[]
+     j=''
      for lettre in mot:
           i.append(lettre)
+     if len(mot)>2: 
+          j=i[1]+i[2]
+          del i[1] 
+          del i[1]
+          i.append(j)
      return i
+          
 
 def attack_y(pos):
      if pos[0]=='A':
@@ -103,7 +118,7 @@ def attack_x(pos):
           index_x=8
      elif pos[1]=='10':
           index_x=9
-     return index_x
+     return index_x  
 
 
 def jeu_fonctionnement(index_y,index_x,jeu):
@@ -120,15 +135,13 @@ def placement_bateau_auto(jeu):
      #Si le bateau depasse du plateau
      if (sens == "H" and position_y + taille > len(jeu[0])) or \
           (sens == "V" and position_x + taille > len(jeu)):
-          print("Erreur: Le bateau dépasse la zone de jeu. Veuillez réessayer.")
-          return
+          return False
 
 #Si la place est deja rpsie
      for i in range(taille):
           if sens == "H" and jeu[position_x][position_y + i] == 1 or \
                sens == "V" and jeu[position_x + i][position_y] == 1:
-               print("Erreur: La case est déjà occupée. Veuillez réessayer.")
-               return
+               return False
         
      if sens=="H":
           for i in range(taille):
@@ -136,3 +149,9 @@ def placement_bateau_auto(jeu):
      elif sens=="V":
           for i in range(taille):
                jeu[position_x+i][position_y]=1
+
+def tour_placement(jeu):
+     if placement_bateau(jeu)==False:
+          tour_placement(jeu)
+     else:
+          placement_bateau(jeu)

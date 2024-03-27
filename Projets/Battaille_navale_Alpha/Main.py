@@ -20,15 +20,14 @@ jeu_ordi=[[0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0],
-     [0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0]]
 
-affichage(jeu)
-for i in range(3):
+affichage(jeu,'normal')
+for i in range(2):
      placement_bateau(jeu)
-     affichage(jeu)
+     affichage(jeu,'normal')
 
-for i in range(3):
+for i in range(2):
      placement_bateau_auto(jeu_ordi)
 
 while jeu_stop(jeu_ordi) and jeu_stop(jeu)!=False:
@@ -40,7 +39,9 @@ while jeu_stop(jeu_ordi) and jeu_stop(jeu)!=False:
      index_attaque_x_ordi=randint.randint(0,9)
      jeu_fonctionnement(index_attaque_y,index_attaque_x,jeu_ordi)
      print("Attaques réalisées: \n")
-     affichage(jeu_ordi)
+     affichage(jeu_ordi,'normal')
      jeu_fonctionnement(index_attaque_y_ordi,index_attaque_x_ordi,jeu)
      print("Attaques subites: \n")
-     affichage(jeu)
+     affichage(jeu,'normal')
+
+

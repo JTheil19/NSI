@@ -2,30 +2,31 @@ from random import randint
 
 
 def affichage(jeu, mode):
-     print("  ", end="")
-     for i in range(10):
-          print(f" {chr(65+i)}", end="")  # Affichage des lettres
-     print("\n" + "   " + "_ " * 10)  # Ligne de séparation
-     for i, ligne in enumerate(jeu):  # Compte le nombre d'éléments
-          print(f"{i+1}|", end=" ")  # Afficher l'indice de ligne
-          for j, case in enumerate(ligne):
-               if mode == "normal":
-                    if case == 0:
-                         print("~", end=" ")
-                    elif case == 1:
-                         print("B", end=" ")
-                    elif case == 2:
-                         print("X", end=" ")
-                    elif case == 3:
-                         print("O", end=" ")
-               elif mode == "attaque":
-                    if case == 3:
-                         print("O", end=" ")
-                    elif case ==  2:
-                         print("X",end=" ")
-                    else:
-                         print("~", end=" ")
-          print()  # Nouvelle ligne après chaque ligne du plateau  # Nouvelle ligne après chaque ligne du plateau
+    print("   ", end="")  # Ajout d'un espace supplémentaire pour aligner les lettres avec les colonnes
+    for i in range(10):
+        print(f" {chr(65 + i)}", end="")  # Affichage des lettres
+    print("\n" + "    " + "_ " * 10)  # Ligne de séparation
+    for i, ligne in enumerate(jeu):  # Compte le nombre d'éléments
+        print(f"{i + 1:2}|", end=" ")  # Afficher l'indice de ligne avec une largeur de deux caractères
+        for j, case in enumerate(ligne):
+            if mode == "normal":
+                if case == 0:
+                    print("~", end=" ")
+                elif case == 1:
+                    print("B", end=" ")
+                elif case == 2:
+                    print("X", end=" ")
+                elif case == 3:
+                    print("O", end=" ")
+            elif mode == "attaque":
+                if case == 3:
+                    print("O", end=" ")
+                elif case == 2:
+                    print("X", end=" ")
+                else:
+                    print("~", end=" ")
+        print()  # Nouvelle ligne après chaque ligne du plateau
+
 
 def placement_bateau(jeu,bateaux_places):
      case=input("Ou voulez vous placer le bateau?(case):").upper()
@@ -139,13 +140,11 @@ def placement_bateau_auto(jeu,bateaux_places):
      taille = randint(3, 5)  
      #Si le bateau depasse du plateau
      if (sens == "H" and position_y + taille > len(jeu[0])) or (sens == "V" and position_x + taille > len(jeu)):
-          print("Erreur: Le bateau dépasse la zone de jeu. Veuillez réessayer.")
           return False
 
 #Si la place est deja rpsie
      for i in range(taille):
           if sens == "H" and jeu[position_x][position_y + i] == 1 or sens == "V" and jeu[position_x + i][position_y] == 1:
-               print("Erreur: La case est déjà occupée. Veuillez réessayer.")
                return False
         
      if sens=="H":

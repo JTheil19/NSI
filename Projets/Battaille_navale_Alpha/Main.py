@@ -23,12 +23,19 @@ jeu_ordi=[[0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0]]
 
 affichage(jeu,'normal')
-for i in range(2):
-     placement_bateau(jeu)
+bateaux_places = []
+for i in range(3):
+     placement_reussi=False
+     while placement_reussi!=True:
+          placement_reussi=placement_bateau(jeu,bateaux_places)
      affichage(jeu,'normal')
 
-for i in range(2):
-     placement_bateau_auto(jeu_ordi)
+bateaux_places_ordi=[]
+for i in range(3):
+     placement_reussi=False
+     while placement_reussi!=True:
+          placement_reussi=placement_bateau_auto(jeu_ordi,bateaux_places_ordi)
+     affichage(jeu_ordi,'normal')
 
 while jeu_stop(jeu_ordi) and jeu_stop(jeu)!=False:
      entry_attack=input("Attaque?: ").upper()
